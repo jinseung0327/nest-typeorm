@@ -12,7 +12,7 @@ import { User } from './users/entities/user.entity';
       host: 'crudbp.cbrivgx1kwoz.ap-northeast-2.rds.amazonaws.com',
       port: 3306,
       username: 'root',
-      password: 'jin009787~',
+      password: 'password',
       database: 'crudbp',
       entities: [User],
       synchronize: true,
