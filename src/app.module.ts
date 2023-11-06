@@ -8,12 +8,12 @@ import { User } from './users/entities/user.entity';
 @Module({
   imports: [
     TypeOrmModule.forRoot({
-      type: 'mysql',
-      host: 'localhost',
+      type: 'mariadb',
+      host: 'crudbp.cbrivgx1kwoz.ap-northeast-2.rds.amazonaws.com',
       port: 3306,
       username: 'root',
       password: 'jin009787~',
-      database: 'test',
+      database: 'crudbp',
       entities: [User],
       synchronize: true,
     }),
