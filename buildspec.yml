@@ -1,0 +1,23 @@
+version: 0.2
+
+phases:
+  pre_build:
+    commands:
+      - echo Logging in to Amazon ECR...
+      - aws ecr get-login-password --region ap-northeast-2 | docker login --username AWS --password-stdin 362708816803.dkr.ecr.ap-northeast-2.amazonaws.com
+  build:
+    commands:
+      - echo Build started on `date`
+      - echo Building the Docker image...
+      - docker build -t wsi-test .
+      - docker tag wsi-test:latest 362708816803.dkr.ecr.ap-northeast-2.amazonaws.com/wsi-test:latest
+  post_build:
+    commands:
+      - echo Build completed on `date`
+      - echo Pushing the Docker image...
+      - docker push 362708816803.dkr.ecr.ap-northeast-2.amazonaws.com/wsi-test:latest
+      - echo Writing image definitions file...
+      - printf '[{"name":"wsi-test","imageUri":"362708816803.dkr.ecr.ap-northeast-2.amazonaws.com/wsi-test:latest"}]' > imagedefinitions.json
+artifacts:
+  files:
+    - imagedefinitions.json
